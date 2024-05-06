@@ -1,7 +1,9 @@
 package br.com.fiap.contatos;
 import br.com.fiap.contatos.dao.Conexao;
 import br.com.fiap.contatos.dao.ContatoDao;
+import br.com.fiap.contatos.dao.TipoContatoDao;
 import br.com.fiap.contatos.model.Contato;
+import br.com.fiap.contatos.model.TipoContato;
 import jakarta.persistence.EntityManager;
 
 
@@ -13,20 +15,30 @@ public class App {
     public static void main(String[] args) {
         EntityManager em = Conexao.getEntityManager();
         cadastrar(em);
-        consultarEmail(em,"arthurtt08@gmail.com");
+
 
 
     }
     public static void cadastrar( EntityManager em){
-        Contato contato = new Contato();
-        contato.setNome("Arthur Santos");
-        contato.setEmail("arthurtt08@gmail.com");
-        contato.setDataNascimento(LocalDate.of(2008, 9, 2));
-        ContatoDao contatoDao = new ContatoDao(em);
+
+        TipoContato tipoContato = new TipoContato();
+        tipoContato.setTipo("Família");
+
+        TipoContatoDao tipoContatoDao = new TipoContatoDao(em);
+
         em.getTransaction().begin();
+        tipoContatoDao.salvar(tipoContato);
+
+        Contato contato = new Contato();
+        contato.setNome("Camilia");
+        contato.setEmail("camila@gmail.com");
+        contato.setDataNascimento(LocalDate.of(2008, 9, 2));
+        contato.setTipoContato(tipoContato);
+
+
+        ContatoDao contatoDao = new ContatoDao(em);
         contatoDao.salvar(contato);
         em.getTransaction().commit();
-
     }
     public static void atualizar( EntityManager em ){
         Contato contato = new Contato();
