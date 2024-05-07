@@ -14,7 +14,7 @@ public class App {
 
     public static void main(String[] args) {
         EntityManager em = Conexao.getEntityManager();
-        cadastrar(em);
+        consultarTipoId(em, 1L);
 
 
 
@@ -66,6 +66,15 @@ public class App {
         em.getTransaction().begin();
         contatoDao.consultarId(id);
         em.getTransaction().commit();
+
+    }
+    public static void consultarTipoId (EntityManager em, long id){
+        TipoContatoDao tipoContatoDao = new TipoContatoDao(em);
+        TipoContato tipoContatoBuscado = new TipoContato();
+        tipoContatoBuscado.setId(id);
+        TipoContato tipoContadoEncontrado  = new TipoContato();
+        tipoContadoEncontrado = tipoContatoDao.consultarTipoID(tipoContatoBuscado);
+        System.out.println(tipoContadoEncontrado.getTipo());
 
     }
     public static void consultarTodos (EntityManager em){

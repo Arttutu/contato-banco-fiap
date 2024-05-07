@@ -2,6 +2,8 @@ package br.com.fiap.contatos.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table (name = "TBL_TIPO_CONTATO")
 public class TipoContato {
@@ -17,6 +19,8 @@ public class TipoContato {
     )
     public  Long id;
     public String tipo;
+    @OneToMany(mappedBy =  "tipoContato")
+    private List<Contato> contatos;
 
     public Long getId() {
         return id;
@@ -34,11 +38,11 @@ public class TipoContato {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "TipoContato{" +
-                "id=" + id +
-                ", tipo='" + tipo + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "TipoContato{" +
+//                "id=" + id +
+//                ", tipo='" + tipo + '\'' +
+//                '}';
+//    }
 }

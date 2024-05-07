@@ -23,6 +23,7 @@ public class Contato {
     @Column(name = "dta_nascimento")
     private LocalDate dataNascimento;
     @ManyToOne
+    @JoinColumn(name = "tipoContato_id") // chave estrangeira nome, relacionamento bidirecional
     private  TipoContato tipoContato;
 
     public TipoContato getTipoContato() {

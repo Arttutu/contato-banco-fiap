@@ -14,4 +14,7 @@ public class TipoContatoDao {
     public  void salvar (TipoContato tipoContato){
         em.persist(tipoContato);
     }
+    public TipoContato consultarTipoID(TipoContato tipoContato){
+        return em.find(TipoContato.class, tipoContato.getId());
+    }
 }
